@@ -1,0 +1,8 @@
+---
+name: ondemand-service-adapter
+
+dependencies:
+- go
+
+files:
+  - github.com/df010/ondemand-service-adapter/**/*

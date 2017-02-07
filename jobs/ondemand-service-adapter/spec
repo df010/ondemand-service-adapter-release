@@ -1,0 +1,8 @@
+---
+name: ondemand-service-adapter
+
+packages: [ondemand-service-adapter]
+
+templates: {}
+
+properties: {}
