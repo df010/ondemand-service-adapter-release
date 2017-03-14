@@ -1,0 +1,13 @@
+#!/bin/bash
+LOGPATH=/var/vcap/sys/log/ondemand-service-adapter/stdout.log
+BOSHPATH=/var/vcap/packages/bosh/bosh
+JOBPATH=/var/vcap/jobs/ondemand-service-adapter
+PACKAGEPATH=/var/vcap/packages/ondemand-service-adapter
+touch $LOGPATH
+echo "running cron job to release deleted deployments" >> $LOGPATH
+echo `date`  >> $LOGPATH
+$BOSHPATH alias-env e --environment=<%=p("bosh.url")%> --ca-cert $JOBPATH/config/root_ca_cert
+echo -e "<%=p("bosh.user")%>\n<%=p("bosh.password")%>" | $BOSHPATH -e e log-in
+deployments=`$BOSHPATH deployments -e e|grep service-instance|cut -f 1|tr '\n' ','`
+[[ "$deployments" == "" ]] && deployments="all"
+$PACKAGEPATH/bin/service-adapter release $deployments

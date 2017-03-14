@@ -1,0 +1,3 @@
+set -e
+
+cp -R bosh/* ${BOSH_INSTALL_TARGET}

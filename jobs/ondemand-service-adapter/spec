@@ -1,8 +1,23 @@
 ---
 name: ondemand-service-adapter
 
-packages: [ondemand-service-adapter]
+packages:
+- ondemand-service-adapter
+- bosh
 
-templates: {}
+templates:
+  cron_odb.erb: config/cron_odb
+  pre-start.erb: bin/pre-start
+  release.sh.erb: bin/release.sh
+  root_ca_cert.erb: config/root_ca_cert
 
-properties: {}
+
+properties: 
+  bosh.root_ca_cert:
+    description: "root ca cert for bosh"
+  bosh.url:
+    description: "url for bosh "
+  bosh.user:
+    description: "user for bosh "
+  bosh.password:
+    description: "user for bosh "
